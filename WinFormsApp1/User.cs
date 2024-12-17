@@ -8,20 +8,30 @@ namespace WinFormsApp1;
 
 public class User
 {
+    //public int Id { get; set; }
+    //public string Loggin { get; set; }
+
+    //public string Password { get; set; }
+
+    //public string SecurityQuestion { get; set; }
+
+    //public string SecurityAnswer { get; set; }
+
+    //public User(string loggin, string password, string securityQuestion, string securityAnswer)
+    //{
+    //    Loggin = loggin;
+    //    Password = password;
+    //    SecurityQuestion = securityQuestion;
+    //    SecurityAnswer = securityAnswer;
+    //}
     public int Id { get; set; }
     public string Loggin { get; set; }
 
     public string Password { get; set; }
 
-    public string SecurityQuestion { get; set; }
-
-    public string SecurityAnswer { get; set; }
-
-    public User(string loggin, string password, string securityQuestion, string securityAnswer)
+    public User(string loggin, string password)
     {
         Loggin = loggin;
         Password = password;
-        SecurityQuestion = securityQuestion;
-        SecurityAnswer = securityAnswer;
     }
 }

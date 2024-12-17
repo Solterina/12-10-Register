@@ -4,6 +4,8 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -24,28 +26,27 @@ namespace WinFormsApp1
         private void btnLogin_Click(object sender, EventArgs e)
         {
             string enteredLogin = txtLogin.Text;
-            string enteredPassword = txtPassword.Text;
+            string enteredPassword = Convert.ToHexString(SHA256.Create().ComputeHash(Encoding.ASCII.GetBytes(txtPassword.Text)));
 
-            if (correcterror <= 0)
+            if (enteredLogin is null || enteredPassword is null)
             {
-                lblResult.Text = "У вас закончились попытки входа!";
-                lblResult.ForeColor = Color.Red;
-                lblResult.Font = new Font("Time new roman", 20, FontStyle.Regular);
+                lblResult.Text = "Введите логин и пароль, пожалуйста";
+                return;
             }
-            else if (db.Users.Any(user => user.Loggin == enteredLogin && user.Password == enteredPassword))
+
+            if (db.Users.Any(user => user.Loggin == enteredLogin && user.Password == enteredPassword))
             {
                 lblResult.Text = "Успешная авторизация";
                 lblResult.ForeColor = Color.White;
                 lblResult.Font = new Font("Time new roman", 20, FontStyle.Regular);
-                correcterror = 3;
             }
             else
             {
-                lblResult.Text = $"Неверный логин или пароль. Попробуйте снова.\n Попыток осталось {correcterror}";
+                lblResult.Text = "Неверный логин или пароль. Попробуйте снова.";
                 lblResult.ForeColor = Color.White;
                 lblResult.Font = new Font("Time new roman", 20, FontStyle.Regular);
-                correcterror--;
             }
+    
             txtLogin.Clear();
             txtPassword.Clear();
 
@@ -55,14 +56,27 @@ namespace WinFormsApp1
 
         private void btnRegister_Click(object sender, EventArgs e)
         {
-            var formRegister = new FormRegister();
-            formRegister.Show();
-        }
+            string enteredLogin = txtLogin.Text;
+            string enteredPassword = Convert.ToHexString(SHA256.Create().ComputeHash(Encoding.ASCII.GetBytes(txtPassword.Text)));
 
-        private void btnForgotPassword_Click(object sender, EventArgs e)
-        {
-            var formRecoverPassword = new FormRecoverPassword();
-            formRecoverPassword.Show();
+            if (enteredLogin is null || enteredPassword is null)
+            {
+                lblResult.Text = "Введите логин и пароль, пожалуйста";
+                return;
+            }
+
+            var user = new User(enteredLogin, enteredPassword);
+
+            if(db.Users.Any(user => user.Loggin == enteredLogin))
+            {
+                lblResult.Text = "Пользователь с такимим именем уже существут";
+                return;
+            }          
+
+            db.Users.Add(user);
+            db.SaveChanges();
+
+            lblResult.Text = "Вы успешно зарегистрировались";
         }
     }
 }

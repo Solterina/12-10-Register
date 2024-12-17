@@ -6,8 +6,10 @@ public class UserDbContext : DbContext
 {
     public DbSet<User> Users { get; set; }
 
+    string connectionString = "Server=localhost;Port=3306;DateBase=auth_app;User=root;Password=;";
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseSqlite("Data Source=DB.db");
+        => optionsBuilder.UseMySQL(connectionString);
 
     public UserDbContext()
     {

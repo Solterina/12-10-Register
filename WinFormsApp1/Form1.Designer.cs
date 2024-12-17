@@ -36,7 +36,6 @@
             lblResult = new Label();
             txtawt = new Label();
             btnRegister = new Button();
-            btnForgotPassword = new Button();
             SuspendLayout();
             // 
             // lblLogin
@@ -75,7 +74,7 @@
             // btnLogin
             // 
             btnLogin.Font = new Font("Microsoft Sans Serif", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            btnLogin.Location = new Point(352, 265);
+            btnLogin.Location = new Point(255, 272);
             btnLogin.Margin = new Padding(4, 3, 4, 3);
             btnLogin.Name = "btnLogin";
             btnLogin.Size = new Size(128, 48);
@@ -125,27 +124,15 @@
             // 
             // btnRegister
             // 
-            btnRegister.Font = new Font("Microsoft YaHei", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            btnRegister.Location = new Point(8, 12);
+            btnRegister.Font = new Font("Microsoft YaHei", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            btnRegister.Location = new Point(391, 272);
             btnRegister.Margin = new Padding(4, 3, 4, 3);
             btnRegister.Name = "btnRegister";
-            btnRegister.Size = new Size(195, 38);
+            btnRegister.Size = new Size(188, 48);
             btnRegister.TabIndex = 7;
-            btnRegister.Text = "Регистрация";
+            btnRegister.Text = "Зарегистрироваться";
             btnRegister.UseVisualStyleBackColor = true;
             btnRegister.Click += btnRegister_Click;
-            // 
-            // btnForgotPassword
-            // 
-            btnForgotPassword.Font = new Font("Microsoft YaHei", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            btnForgotPassword.Location = new Point(8, 56);
-            btnForgotPassword.Margin = new Padding(4, 3, 4, 3);
-            btnForgotPassword.Name = "btnForgotPassword";
-            btnForgotPassword.Size = new Size(195, 38);
-            btnForgotPassword.TabIndex = 8;
-            btnForgotPassword.Text = "Забыли пароль?";
-            btnForgotPassword.UseVisualStyleBackColor = true;
-            btnForgotPassword.Click += btnForgotPassword_Click;
             // 
             // Form1
             // 
@@ -153,7 +140,6 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = Properties.Resources._80824ca68c16f57fec97e144c6518cc23ff4820b;
             ClientSize = new Size(799, 442);
-            Controls.Add(btnForgotPassword);
             Controls.Add(btnRegister);
             Controls.Add(txtawt);
             Controls.Add(lblResult);
@@ -179,7 +165,6 @@
         private Label lblResult;
         private Label txtawt;
         private Button btnRegister;
-        private Button btnForgotPassword;
     }
 }
 
