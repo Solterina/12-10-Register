@@ -28,13 +28,14 @@ namespace WinFormsApp1
             string enteredLogin = txtLogin.Text;
             string enteredPassword = Convert.ToHexString(SHA256.Create().ComputeHash(Encoding.ASCII.GetBytes(txtPassword.Text)));
 
-            if (enteredLogin is null || enteredPassword is null)
+            if (enteredLogin == "" || enteredPassword == "")
             {
                 lblResult.Text = "Введите логин и пароль, пожалуйста";
-                return;
+                lblResult.ForeColor = Color.White;
+                lblResult.Font = new Font("Time new roman", 20, FontStyle.Regular);
             }
 
-            if (db.Users.Any(user => user.Loggin == enteredLogin && user.Password == enteredPassword))
+            else if (db.users.Any(user => user.Username == enteredLogin && user.Password == enteredPassword))
             {
                 lblResult.Text = "Успешная авторизация";
                 lblResult.ForeColor = Color.White;
@@ -59,24 +60,35 @@ namespace WinFormsApp1
             string enteredLogin = txtLogin.Text;
             string enteredPassword = Convert.ToHexString(SHA256.Create().ComputeHash(Encoding.ASCII.GetBytes(txtPassword.Text)));
 
-            if (enteredLogin is null || enteredPassword is null)
+            if (enteredLogin =="" || enteredPassword=="")
             {
                 lblResult.Text = "Введите логин и пароль, пожалуйста";
+                lblResult.ForeColor = Color.White;
+                lblResult.Font = new Font("Time new roman", 20, FontStyle.Regular);
                 return;
             }
 
             var user = new User(enteredLogin, enteredPassword);
 
-            if(db.Users.Any(user => user.Loggin == enteredLogin))
+            if(db.users.Any(user => user.Username == enteredLogin))
             {
                 lblResult.Text = "Пользователь с такимим именем уже существут";
+                lblResult.ForeColor = Color.White;
+                lblResult.Font = new Font("Time new roman", 20, FontStyle.Regular);
                 return;
-            }          
+            }
+            
 
-            db.Users.Add(user);
+            db.users.Add(user);
             db.SaveChanges();
 
             lblResult.Text = "Вы успешно зарегистрировались";
+
+            txtLogin.Clear();
+            txtPassword.Clear();
+
+            txtLogin.Focus();
+            lblResult.Left = (this.ClientSize.Width - lblResult.Width) / 2;
         }
     }
 }
